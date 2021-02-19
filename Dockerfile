@@ -15,7 +15,7 @@ ENV DL_FOLDER dataloader-51.0.1
 ADD https://github.com/forcedotcom/dataloader/archive/$DL_FILE.zip ./
 RUN unzip $DL_FILE.zip && \
     cd ./$DL_FOLDER && \
-    mvn clean package -DskipTests && \
+    mvn clean package -X -DskipTests && \
     mv target/dataloader-$DL_VER-uber.jar $DL_ROOT/bin/ && \
     cp license.txt $DL_ROOT/bin/ && \
     cd .. && rm -r ./$DL_FOLDER ./$DL_FILE.zip 
