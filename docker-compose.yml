@@ -1,0 +1,7 @@
+version: '2'
+services:
+  dataloader:
+#    image: okazakiyuji/dataloader
+    build:
+      context: .
+      dockerfile: Dockerfile
