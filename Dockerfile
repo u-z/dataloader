@@ -9,9 +9,9 @@ ENV DL_ROOT /opt/dataloader
 RUN mkdir -p $DL_ROOT && cd $DL_ROOT && mkdir bin conf data status log
 # Build Dataloader 
 WORKDIR /tmp
-ENV DL_VER 42.0.0
-ENV DL_FILE V42.0
-ENV DL_FOLDER dataloader-42.0
+ENV DL_VER 51.0.1
+ENV DL_FILE v51.0.1
+ENV DL_FOLDER dataloader-51.0.1
 ADD https://github.com/forcedotcom/dataloader/archive/$DL_FILE.zip ./
 RUN unzip $DL_FILE.zip && \
     cd ./$DL_FOLDER && \
@@ -20,7 +20,7 @@ RUN unzip $DL_FILE.zip && \
     cp license.txt $DL_ROOT/bin/ && \
     cd .. && rm -r ./$DL_FOLDER ./$DL_FILE.zip 
 # Install mysql connector
-ENV MYSQL_CON_VER 2.1.0
+ENV MYSQL_CON_VER 2.7.2
 ADD https://downloads.mariadb.com/Connectors/java/connector-java-$MYSQL_CON_VER/mariadb-java-client-$MYSQL_CON_VER.jar $DL_BIN_DIR/
 #
 ENV DATALOADER_CLASSPATH $DL_ROOT/bin/mariadb-java-client-$MYSQL_CON_VER.jar:$DL_ROOT/bin/dataloader-$DL_VER-uber.jar
