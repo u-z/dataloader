@@ -2,8 +2,12 @@ FROM centos:8
 MAINTAINER okazakiyuji <zaki@mbf.nifty.com>
 # DataloaderはビルドするのにJava11が必要
 RUN dnf -y update && \
-    dnf -y install git svn which java-11-openjdk java-11-openjdk-devel unzip mysql && \
+    dnf -y install langpacks-ja git svn which java-11-openjdk java-11-openjdk-devel unzip mysql && \
+    cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
     rm -rf /var/cache/yum/* && yum clean all
+ENV LANG="ja_JP.UTF-8" \
+    LANGUAGE="ja_JP:ja" \
+    LC_ALL="ja_JP.UTF-8"
 # make directory
 ENV DL_ROOT /opt/dataloader
 RUN mkdir -p $DL_ROOT && cd $DL_ROOT && mkdir bin conf data status log
@@ -18,9 +22,9 @@ ENV PATH $PATH:/opt/apache-maven/bin
 # Build Dataloader
 WORKDIR /tmp
 # 51.0.1 はビルドできない
-ENV DL_VER 50.0.0
-ENV DL_FILE v50.0.0
-ENV DL_FOLDER dataloader-50.0.0
+ENV DL_VER=50.0.0 \
+    DL_FILE=v50.0.0 \
+    DL_FOLDER=dataloader-50.0.0
 RUN curl -L -O https://github.com/forcedotcom/dataloader/archive/$DL_FILE.zip && \
     unzip $DL_FILE.zip && cd $DL_FOLDER && \
     mvn clean package -DskipTests && \
