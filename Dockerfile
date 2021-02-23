@@ -10,7 +10,7 @@ ENV LANG="ja_JP.UTF-8" \
     LC_ALL="ja_JP.UTF-8"
 # make directory
 ENV DL_ROOT /opt/dataloader
-RUN mkdir -p $DL_ROOT && cd $DL_ROOT && mkdir bin conf status log
+RUN mkdir -p $DL_ROOT && cd $DL_ROOT && mkdir bin conf data status log
 VOLUME /opt/dataloader/data
 # Build Maven
 # Mavenをdnfでインストールするとjava8がインストールされるのでバイナリを使用する
