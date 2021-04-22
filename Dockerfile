@@ -2,7 +2,7 @@ FROM centos:8
 MAINTAINER okazakiyuji <zaki@mbf.nifty.com>
 # DataloaderはビルドするのにJava11が必要
 RUN dnf -y update && \
-    dnf -y install langpacks-ja git svn which java-11-openjdk java-11-openjdk-devel unzip mysql && \
+    dnf -y install langpacks-ja git svn which java-11-openjdk java-11-openjdk-devel unzip mariadb && \
     cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
     rm -rf /var/cache/yum/* && yum clean all
 ENV LANG="ja_JP.UTF-8" \
